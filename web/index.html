@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Graded Karaoke</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main>
+  <section id="intro">
+    <h1>Graded Karaoke</h1>
+    <p>Sing along and get graded line by line. Any octave counts, so low and high voices both score fairly.</p>
+    <p>Use headphones so the backing track doesn’t leak into your mic.</p>
+    <button id="enable">Enable microphone</button>
+    <p id="msg" class="hint" role="status"></p>
+  </section>
+
+  <section id="stage" hidden>
+    <div class="bar">
+      <label>Song <select id="song"></select></label>
+      <div class="live"><span class="note" id="nn">–</span><span class="cents" id="cc"></span><div class="meter"><i id="lv"></i></div></div>
+    </div>
+    <div class="lyrics" id="lyr"><ol id="ol"></ol><div class="count" id="count" hidden></div></div>
+    <canvas id="cv" aria-label="Target notes and your sung pitch"></canvas>
+    <p class="hint">Pink bars are the target notes, blue dots are your voice. Notes match in any octave.</p>
+    <div class="ctl">
+      <button id="go">Start song</button>
+      <button id="stop" class="ghost" hidden>Stop</button>
+      <label><input type="checkbox" id="guide" checked> Guide tone</label>
+    </div>
+  </section>
+
+  <section id="results" hidden>
+    <p>Your score</p>
+    <div class="total" id="tot">0</div>
+    <p id="grade"></p>
+    <div id="rows"></div>
+    <p></p><button id="again">Sing again</button>
+  </section>
+</main>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

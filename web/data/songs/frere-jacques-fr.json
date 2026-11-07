@@ -1,0 +1,449 @@
+{
+ "id": "frere-jacques-fr",
+ "title": "Frère Jacques",
+ "language": "fr",
+ "bpm": 100,
+ "audioUrl": null,
+ "lines": [
+  {
+   "start": 0.0,
+   "end": 4.8,
+   "text": "Frère Jacques, Frère Jacques,",
+   "notes": [
+    {
+     "time": 0.0,
+     "duration": 0.6,
+     "midi": 60,
+     "syl": "Frè"
+    },
+    {
+     "time": 0.6,
+     "duration": 0.6,
+     "midi": 62,
+     "syl": "re "
+    },
+    {
+     "time": 1.2,
+     "duration": 0.6,
+     "midi": 64,
+     "syl": "Jac"
+    },
+    {
+     "time": 1.8,
+     "duration": 0.6,
+     "midi": 60,
+     "syl": "ques, "
+    },
+    {
+     "time": 2.4,
+     "duration": 0.6,
+     "midi": 60,
+     "syl": "Frè"
+    },
+    {
+     "time": 3.0,
+     "duration": 0.6,
+     "midi": 62,
+     "syl": "re "
+    },
+    {
+     "time": 3.6,
+     "duration": 0.6,
+     "midi": 64,
+     "syl": "Jac"
+    },
+    {
+     "time": 4.2,
+     "duration": 0.6,
+     "midi": 60,
+     "syl": "ques, "
+    }
+   ]
+  },
+  {
+   "start": 4.8,
+   "end": 9.6,
+   "text": "Dormez vous? Dormez vous?",
+   "notes": [
+    {
+     "time": 4.8,
+     "duration": 0.6,
+     "midi": 64,
+     "syl": "Dor"
+    },
+    {
+     "time": 5.4,
+     "duration": 0.6,
+     "midi": 65,
+     "syl": "mez "
+    },
+    {
+     "time": 6.0,
+     "duration": 1.2,
+     "midi": 67,
+     "syl": "vous? "
+    },
+    {
+     "time": 7.2,
+     "duration": 0.6,
+     "midi": 64,
+     "syl": "Dor"
+    },
+    {
+     "time": 7.8,
+     "duration": 0.6,
+     "midi": 65,
+     "syl": "mez "
+    },
+    {
+     "time": 8.4,
+     "duration": 1.2,
+     "midi": 67,
+     "syl": "vous? "
+    }
+   ]
+  },
+  {
+   "start": 9.6,
+   "end": 14.4,
+   "text": "Sonnez les matines! Sonnez les matines!",
+   "notes": [
+    {
+     "time": 9.6,
+     "duration": 0.3,
+     "midi": 67,
+     "syl": "Son"
+    },
+    {
+     "time": 9.9,
+     "duration": 0.3,
+     "midi": 69,
+     "syl": "nez "
+    },
+    {
+     "time": 10.2,
+     "duration": 0.3,
+     "midi": 67,
+     "syl": "les "
+    },
+    {
+     "time": 10.5,
+     "duration": 0.3,
+     "midi": 65,
+     "syl": "ma"
+    },
+    {
+     "time": 10.8,
+     "duration": 0.6,
+     "midi": 64,
+     "syl": "ti"
+    },
+    {
+     "time": 11.4,
+     "duration": 0.6,
+     "midi": 60,
+     "syl": "nes! "
+    },
+    {
+     "time": 12.0,
+     "duration": 0.3,
+     "midi": 67,
+     "syl": "Son"
+    },
+    {
+     "time": 12.3,
+     "duration": 0.3,
+     "midi": 69,
+     "syl": "nez "
+    },
+    {
+     "time": 12.6,
+     "duration": 0.3,
+     "midi": 67,
+     "syl": "les "
+    },
+    {
+     "time": 12.9,
+     "duration": 0.3,
+     "midi": 65,
+     "syl": "ma"
+    },
+    {
+     "time": 13.2,
+     "duration": 0.6,
+     "midi": 64,
+     "syl": "ti"
+    },
+    {
+     "time": 13.8,
+     "duration": 0.6,
+     "midi": 60,
+     "syl": "nes! "
+    }
+   ]
+  },
+  {
+   "start": 14.4,
+   "end": 19.2,
+   "text": "Ding, dang, dong. Ding, dang, dong.",
+   "notes": [
+    {
+     "time": 14.4,
+     "duration": 0.6,
+     "midi": 60,
+     "syl": "Ding, "
+    },
+    {
+     "time": 15.0,
+     "duration": 0.6,
+     "midi": 67,
+     "syl": "dang, "
+    },
+    {
+     "time": 15.6,
+     "duration": 1.2,
+     "midi": 60,
+     "syl": "dong. "
+    },
+    {
+     "time": 16.8,
+     "duration": 0.6,
+     "midi": 60,
+     "syl": "Ding, "
+    },
+    {
+     "time": 17.4,
+     "duration": 0.6,
+     "midi": 67,
+     "syl": "dang, "
+    },
+    {
+     "time": 18.0,
+     "duration": 1.2,
+     "midi": 60,
+     "syl": "dong. "
+    }
+   ]
+  },
+  {
+   "start": 19.2,
+   "end": 24.0,
+   "text": "Frère Jacques, Frère Jacques,",
+   "notes": [
+    {
+     "time": 19.2,
+     "duration": 0.6,
+     "midi": 60,
+     "syl": "Frè"
+    },
+    {
+     "time": 19.8,
+     "duration": 0.6,
+     "midi": 62,
+     "syl": "re "
+    },
+    {
+     "time": 20.4,
+     "duration": 0.6,
+     "midi": 64,
+     "syl": "Jac"
+    },
+    {
+     "time": 21.0,
+     "duration": 0.6,
+     "midi": 60,
+     "syl": "ques, "
+    },
+    {
+     "time": 21.6,
+     "duration": 0.6,
+     "midi": 60,
+     "syl": "Frè"
+    },
+    {
+     "time": 22.2,
+     "duration": 0.6,
+     "midi": 62,
+     "syl": "re "
+    },
+    {
+     "time": 22.8,
+     "duration": 0.6,
+     "midi": 64,
+     "syl": "Jac"
+    },
+    {
+     "time": 23.4,
+     "duration": 0.6,
+     "midi": 60,
+     "syl": "ques, "
+    }
+   ]
+  },
+  {
+   "start": 24.0,
+   "end": 28.8,
+   "text": "Dormez vous? Dormez vous?",
+   "notes": [
+    {
+     "time": 24.0,
+     "duration": 0.6,
+     "midi": 64,
+     "syl": "Dor"
+    },
+    {
+     "time": 24.6,
+     "duration": 0.6,
+     "midi": 65,
+     "syl": "mez "
+    },
+    {
+     "time": 25.2,
+     "duration": 1.2,
+     "midi": 67,
+     "syl": "vous? "
+    },
+    {
+     "time": 26.4,
+     "duration": 0.6,
+     "midi": 64,
+     "syl": "Dor"
+    },
+    {
+     "time": 27.0,
+     "duration": 0.6,
+     "midi": 65,
+     "syl": "mez "
+    },
+    {
+     "time": 27.6,
+     "duration": 1.2,
+     "midi": 67,
+     "syl": "vous? "
+    }
+   ]
+  },
+  {
+   "start": 28.8,
+   "end": 33.6,
+   "text": "Sonnez les matines! Sonnez les matines!",
+   "notes": [
+    {
+     "time": 28.8,
+     "duration": 0.3,
+     "midi": 67,
+     "syl": "Son"
+    },
+    {
+     "time": 29.1,
+     "duration": 0.3,
+     "midi": 69,
+     "syl": "nez "
+    },
+    {
+     "time": 29.4,
+     "duration": 0.3,
+     "midi": 67,
+     "syl": "les "
+    },
+    {
+     "time": 29.7,
+     "duration": 0.3,
+     "midi": 65,
+     "syl": "ma"
+    },
+    {
+     "time": 30.0,
+     "duration": 0.6,
+     "midi": 64,
+     "syl": "ti"
+    },
+    {
+     "time": 30.6,
+     "duration": 0.6,
+     "midi": 60,
+     "syl": "nes! "
+    },
+    {
+     "time": 31.2,
+     "duration": 0.3,
+     "midi": 67,
+     "syl": "Son"
+    },
+    {
+     "time": 31.5,
+     "duration": 0.3,
+     "midi": 69,
+     "syl": "nez "
+    },
+    {
+     "time": 31.8,
+     "duration": 0.3,
+     "midi": 67,
+     "syl": "les "
+    },
+    {
+     "time": 32.1,
+     "duration": 0.3,
+     "midi": 65,
+     "syl": "ma"
+    },
+    {
+     "time": 32.4,
+     "duration": 0.6,
+     "midi": 64,
+     "syl": "ti"
+    },
+    {
+     "time": 33.0,
+     "duration": 0.6,
+     "midi": 60,
+     "syl": "nes! "
+    }
+   ]
+  },
+  {
+   "start": 33.6,
+   "end": 38.4,
+   "text": "Ding, dang, dong. Ding, dang, dong.",
+   "notes": [
+    {
+     "time": 33.6,
+     "duration": 0.6,
+     "midi": 60,
+     "syl": "Ding, "
+    },
+    {
+     "time": 34.2,
+     "duration": 0.6,
+     "midi": 67,
+     "syl": "dang, "
+    },
+    {
+     "time": 34.8,
+     "duration": 1.2,
+     "midi": 60,
+     "syl": "dong. "
+    },
+    {
+     "time": 36.0,
+     "duration": 0.6,
+     "midi": 60,
+     "syl": "Ding, "
+    },
+    {
+     "time": 36.6,
+     "duration": 0.6,
+     "midi": 67,
+     "syl": "dang, "
+    },
+    {
+     "time": 37.2,
+     "duration": 1.2,
+     "midi": 60,
+     "syl": "dong. "
+    }
+   ]
+  }
+ ]
+}

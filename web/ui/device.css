@@ -1,0 +1,128 @@
+/* The physical unit. .device is the sizing container; everything inside is measured in cqw
+   (1cqw = 1% of device width) so the whole unit scales as one piece from a phone to a desk. */
+
+.device{position:relative;width:var(--device-w);container-type:inline-size;flex:none}
+
+.shell{
+  position:relative;z-index:1;display:grid;gap:3cqw;
+  padding:3.2cqw 3.2cqw 3.4cqw;border-radius:8cqw;
+  background:linear-gradient(180deg,var(--shell-hi) 0%,var(--shell) 38%,var(--shell-lo) 100%);
+  box-shadow:
+    inset 0 0 0 .35cqw rgba(255,255,255,.92),
+    inset 0 -.4cqw .8cqw rgba(0,0,0,.07),
+    0 2.4cqw 0 -.4cqw var(--slab),              /* the lower slab: body thickness */
+    0 3.4cqw 0 -.6cqw rgba(0,0,0,.10),
+    0 7cqw 7cqw -3cqw rgba(0,0,0,.30),          /* contact shadow */
+    0 16cqw 22cqw -8cqw rgba(0,0,0,.28);        /* ambient shadow */
+}
+
+/* ── Side wheel ─────────────────────────────────────────────────── */
+.jog{
+  position:absolute;z-index:2;right:-1.5cqw;top:30cqw;width:4cqw;height:17cqw;padding:0;border:0;
+  border-radius:1cqw;overflow:visible;
+  background:linear-gradient(90deg,#b4b4b2 0%,#e6e6e4 38%,#f7f7f5 55%,#c9c9c7 100%);
+  box-shadow:.25cqw 0 .8cqw rgba(0,0,0,.28),inset 0 0 0 .2cqw rgba(0,0,0,.10);
+  cursor:ns-resize;
+}
+.jog::before{                                      /* knurling; --spin is set by ui.js */
+  content:"";position:absolute;inset:0;border-radius:inherit;
+  background:repeating-linear-gradient(180deg,rgba(0,0,0,.17) 0 .38cqw,transparent .38cqw 1.1cqw);
+  background-position:0 calc(var(--spin,0) * 1cqw);
+  transition:background-position var(--t-slow) var(--ease-out);
+}
+.jog::after{                                       /* cylinder shading + wider invisible hit area */
+  content:"";position:absolute;inset:0 -3cqw 0 -1cqw;border-radius:inherit;
+  background:linear-gradient(180deg,rgba(0,0,0,.30),transparent 26%,transparent 74%,rgba(0,0,0,.30)) 1cqw 0/4cqw 100% no-repeat;
+}
+.jog:disabled{cursor:default}
+.jog:disabled::before{opacity:.55}
+.jog:focus-visible{outline:.7cqw solid var(--red);outline-offset:.5cqw}
+
+/* ── Chin ───────────────────────────────────────────────────────── */
+.chin{display:flex;align-items:center;gap:3.4cqw;height:7.6cqw;padding:0 .4cqw}
+
+.pill{
+  position:relative;flex:none;display:inline-flex;align-items:center;gap:1.7cqw;
+  height:7.4cqw;padding:0 3cqw 0 2.8cqw;border:0;border-radius:2.4cqw;
+  background:#000;color:#fff;font-size:max(11px,3.1cqw);font-weight:500;line-height:1;letter-spacing:.01em;
+  box-shadow:inset 0 .2cqw 0 rgba(255,255,255,.12),0 .3cqw .6cqw rgba(0,0,0,.18);
+  transition:transform var(--t-fast) var(--ease-out),opacity var(--t-base) var(--ease-out);
+}
+.pill::before{content:"";position:absolute;inset-inline:0;top:min(0px,calc(50% - 22px));bottom:min(0px,calc(50% - 22px))} /* 44px hit area */
+.pill svg{width:3.6cqw;height:3.6cqw;flex:none}
+.pill:active:not(:disabled){transform:scale(.96);transition-duration:var(--t-press)}
+.pill:disabled{opacity:.78;cursor:default}
+.pill:focus-visible{outline:.7cqw solid var(--red);outline-offset:.5cqw}
+.pill .led{position:relative;flex:none;width:1.3cqw;height:1.3cqw;margin-left:.4cqw;border-radius:50%;background:#555}
+.pill .led::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--red);opacity:0}
+body[data-mode="off"] .pill .led{background:var(--red)}
+body[data-mode="off"] .pill .led::after{animation:led-ring 2.4s var(--ease-out) 1.2s infinite}
+body:not([data-mode="off"]) .pill .led{background:#e9e9e7}
+
+.grille{
+  flex:1;height:7.2cqw;
+  background-image:radial-gradient(circle,#2b2b2e 0 .42cqw,transparent .52cqw);
+  background-size:1.78cqw 1.78cqw;background-position:center;
+}
+
+/* ── Key pad ────────────────────────────────────────────────────── */
+.pad{
+  display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:.55cqw;
+  height:35cqw;padding:.55cqw;border-radius:4.4cqw;overflow:hidden;background:var(--groove);
+  box-shadow:0 0 0 .3cqw rgba(0,0,0,.35),0 .35cqw 0 rgba(255,255,255,.85);
+}
+.key{
+  position:relative;display:grid;place-items:center;margin:0;padding:0;border:0;border-radius:.7cqw;
+  background:linear-gradient(180deg,#e4e4e2,var(--key));
+  box-shadow:inset 0 .25cqw 0 rgba(255,255,255,.75);
+  color:var(--glyph);
+}
+.key--rec{grid-area:1/1/3/2}
+.key--stop{grid-area:1/2/3/3}
+.key--guide{grid-area:1/3/2/4}
+.key--again{grid-area:2/3/3/4}
+.key:focus-visible,.key:has(input:focus-visible){outline:.7cqw solid var(--red);outline-offset:-1.3cqw}
+
+.cap{
+  display:grid;place-items:center;width:22cqw;height:22cqw;border-radius:50%;
+  background:radial-gradient(circle at 50% 28%,var(--cap-hi) 0%,#e2e2e0 55%,var(--cap-lo) 100%);
+  box-shadow:0 .9cqw 1.8cqw rgba(0,0,0,.14),0 .2cqw .4cqw rgba(0,0,0,.10),inset 0 .25cqw .2cqw #fff,inset 0 -.6cqw 1cqw rgba(0,0,0,.06);
+  /* release: slow ease-out, like a spring cap settling */
+  transition:transform var(--t-base) var(--ease-out),box-shadow var(--t-base) var(--ease-out);
+}
+.key--guide .cap,.key--again .cap{width:12.4cqw;height:12.4cqw}
+
+.glyph{width:42%;height:42%;fill:currentColor;transition:opacity var(--t-base) var(--ease-out),color var(--t-base) var(--ease-out)}
+.glyph--rec{fill:var(--rec-matte)}
+.glyph--line{width:48%;height:48%;fill:none}
+
+/* press: quick in, ease-out back */
+.key:active:not(:disabled) .cap,
+.key:has(input:active:not(:disabled)) .cap,
+.key--guide:active .cap{
+  transform:scale(.94);transition-duration:var(--t-press);
+  box-shadow:0 .2cqw .5cqw rgba(0,0,0,.14),inset 0 .5cqw 1.2cqw rgba(0,0,0,.16),inset 0 .15cqw .15cqw rgba(255,255,255,.6);
+}
+
+/* unavailable keys */
+.key:disabled:not([hidden]) .glyph,.key:has(input:disabled) .glyph{opacity:.38}
+.key:disabled,.key:has(input:disabled){cursor:not-allowed}
+.key--stop[hidden] .glyph{opacity:.38}
+
+/* Record is latched down while a take is running (main.js hides #go; ui.css keeps it on screen as the "held" key) */
+.key[hidden]{display:grid!important}
+.key--rec[hidden] .cap{
+  transform:scale(.94);
+  box-shadow:0 .2cqw .5cqw rgba(0,0,0,.14),inset 0 .5cqw 1.2cqw rgba(0,0,0,.18),inset 0 .15cqw .15cqw rgba(255,255,255,.6);
+}
+.key--rec[hidden] .glyph--rec{fill:var(--red);opacity:1}
+
+/* LEDs */
+.key .led{
+  position:absolute;top:2.8cqw;left:50%;width:1.3cqw;height:1.3cqw;margin-left:-.65cqw;border-radius:50%;
+  background:var(--led-off);box-shadow:inset 0 .15cqw .3cqw rgba(0,0,0,.28);
+  transition:background var(--t-fast) var(--ease-out),box-shadow var(--t-base) var(--ease-out);
+}
+.key--guide .led{top:2.4cqw}
+.key--rec[hidden] .led,.key--guide:has(input:checked:not(:disabled)) .led{background:var(--red);box-shadow:0 0 1.2cqw rgba(255,59,48,.55)}
+.key--guide:has(input:checked:not(:disabled)) .glyph{color:#3b3b3f}

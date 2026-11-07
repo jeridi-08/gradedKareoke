@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/graded-karaoke.iml" filepath="$PROJECT_DIR$/.idea/graded-karaoke.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/graded-karaoke-ui.iml" filepath="$PROJECT_DIR$/.idea/graded-karaoke-ui.iml" />
     </modules>
   </component>
 </project>

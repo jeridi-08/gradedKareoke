@@ -1,0 +1,128 @@
+/* The LCD and its three screens (#intro, #stage, #results). Still measured in cqw. */
+
+.bezel{
+  padding:.8cqw;border-radius:5.4cqw;background:#050506;
+  box-shadow:inset 0 0 0 .3cqw #1c1c1f,0 .35cqw 0 rgba(255,255,255,.9),0 -.15cqw .5cqw rgba(0,0,0,.30);
+}
+.lcd{
+  position:relative;height:112cqw;display:grid;grid-template-rows:auto minmax(0,1fr);gap:2.2cqw;
+  padding:5cqw 5.5cqw 5.2cqw;border-radius:4.7cqw;overflow:hidden;color:var(--ink);
+  background:radial-gradient(130% 80% at 50% 0%,var(--lcd-1) 0%,#0d0d0f 52%,var(--lcd-0) 100%);
+}
+.lcd::after{                                       /* scanlines: pure texture, never intercepts input */
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:5;
+  background:repeating-linear-gradient(180deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px);
+}
+
+/* ── Status bar ─────────────────────────────────────────────────── */
+.status{display:flex;align-items:center;gap:3.6cqw;height:5.4cqw;font-size:max(11px,3.2cqw);line-height:1;color:var(--mute);font-variant-numeric:tabular-nums}
+.status time{flex:none}
+.state{display:inline-flex;align-items:center;gap:1.5cqw;text-transform:uppercase;letter-spacing:.05em}
+.dot{width:1.3cqw;height:1.3cqw;border-radius:50%;background:var(--mute)}
+body[data-mode="count"] .dot,body[data-mode="singing"] .dot{background:var(--red)}
+body[data-mode="ready"] .dot{background:var(--ink)}
+.status-icons{margin-left:auto;display:inline-flex;align-items:center;gap:3.2cqw;color:var(--ink)}
+.status-icons svg{width:3.8cqw;height:3.8cqw;display:block}
+.i-play{fill:currentColor;opacity:.3;transition:opacity var(--t-base) var(--ease-out)}
+body[data-mode="count"] .i-play,body[data-mode="singing"] .i-play{opacity:1}
+.i-signal path{opacity:.28;transition:opacity var(--t-fast) var(--ease-out)}
+.i-signal .a0{opacity:1}
+#signal[data-level="1"] .a1,#signal[data-level="2"] .a1,#signal[data-level="3"] .a1,
+#signal[data-level="2"] .a2,#signal[data-level="3"] .a2,#signal[data-level="3"] .a3{opacity:1}
+body[data-mode="off"] .i-signal{opacity:.35}
+
+/* ── Screens ────────────────────────────────────────────────────── */
+.screen{position:relative;min-height:0}
+.screen>section{height:100%;min-height:0}
+.hint{margin:1cqw 0 0;font-size:max(11px,3.2cqw);color:var(--mute)}
+.hint:empty{display:none}
+.hint.err,#intro .hint.err{color:#ff6a5f}                            /* 6.3:1 on LCD */
+
+/* Intro: idle recorder. A flat dotted line with the playhead parked at the start. */
+#intro{position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:.5cqw}
+#intro::before{
+  content:"";position:absolute;left:0;right:0;top:19cqw;height:1.2cqw;
+  background:radial-gradient(circle,rgba(255,255,255,.5) 0 .22cqw,transparent .3cqw) 0 50%/1.5cqw 1.2cqw repeat-x;
+}
+#intro::after{content:"";position:absolute;left:0;top:11.5cqw;width:.35cqw;height:16cqw;background:var(--red);border-radius:.2cqw}
+#intro h1{margin:0 0 3cqw;font-size:9.4cqw;line-height:1;font-weight:300;letter-spacing:-.035em}
+#intro p{margin:0 0 2.2cqw;font-size:max(12px,3.5cqw);line-height:1.45;color:var(--mute);max-width:62ch}
+#intro .cue,#results .cue{color:var(--ink)}
+.cue b{font-weight:500}
+.inline-i{display:inline-block;width:1.1em;height:1.1em;vertical-align:-.2em}
+
+/* Stage */
+#stage{display:grid;grid-template-rows:auto 19cqw minmax(0,1fr) auto auto;gap:2.4cqw}
+.songpick{position:relative;display:block}
+.songpick::after{                                   /* chevron */
+  content:"";position:absolute;right:.4cqw;top:50%;width:1.8cqw;height:1.8cqw;margin-top:-1.3cqw;
+  border-right:.35cqw solid var(--mute);border-bottom:.35cqw solid var(--mute);transform:rotate(45deg);pointer-events:none;
+}
+.songpick select{
+  appearance:none;-webkit-appearance:none;display:block;width:100%;min-height:max(44px,9cqw);margin:0;padding:0 5cqw 0 0;
+  border:0;border-radius:1cqw;background:transparent;color:var(--ink);cursor:pointer;
+  font-size:max(15px,4.6cqw);font-weight:400;letter-spacing:-.01em;text-overflow:ellipsis;
+}
+.songpick select:disabled{cursor:not-allowed;color:var(--ink-dim)}
+.songpick select:focus-visible{outline:.45cqw solid var(--ink);outline-offset:.4cqw}
+.songpick option{color:#111;background:#fff}
+.bar{min-height:0}
+
+.lyrics{
+  position:relative;overflow:hidden;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 24%,#000 76%,transparent 100%);
+  mask-image:linear-gradient(180deg,transparent 0,#000 24%,#000 76%,transparent 100%);
+}
+.lyrics ol{list-style:none;margin:0;padding:0;position:absolute;left:0;right:0;transition:transform var(--t-slow) var(--ease-out)}
+.lyrics li{padding:.9cqw 0;font-size:max(15px,4.3cqw);font-weight:400;line-height:1.25;letter-spacing:-.005em;white-space:pre-wrap;opacity:.4;transition:opacity var(--t-base) var(--ease-out)}
+.lyrics li.act{opacity:1}
+.lyrics li span{transition:color var(--t-fast) var(--ease-out)}
+.lyrics .done{color:var(--red)}
+
+.count{
+  position:absolute;inset:0;display:grid;place-items:center;font-size:0;color:transparent;
+  background:rgba(10,10,12,.97);
+}
+.count::before{content:attr(data-n);font-size:22cqw;font-weight:200;line-height:1;color:var(--red);font-variant-numeric:tabular-nums}
+
+canvas{display:block;width:100%;height:100%;min-height:0;border-block:1px solid var(--line)}
+.legend{display:flex;gap:4cqw;margin:0;padding:0;list-style:none;font-size:max(11px,3cqw);color:var(--mute)}
+.legend li{display:inline-flex;align-items:center;gap:1.4cqw}
+.sw{display:inline-block}
+.sw--target{width:3.2cqw;height:1cqw;border-radius:.4cqw;background:var(--target)}
+.sw--sung{width:1.3cqw;height:1.3cqw;border-radius:50%;background:var(--sung)}
+
+/* Readout: tick meter on top, big timer under it, note on the right */
+.read{display:grid;grid-template-columns:1fr auto;grid-template-areas:"meter meter" "clock live";align-items:end;column-gap:3cqw;row-gap:1.6cqw}
+.meter{grid-area:meter;position:relative;height:5cqw}
+.meter{
+  -webkit-mask-image:linear-gradient(90deg,#000 .32cqw,transparent .32cqw),linear-gradient(90deg,#000 .32cqw,transparent .32cqw);
+  mask-image:linear-gradient(90deg,#000 .32cqw,transparent .32cqw),linear-gradient(90deg,#000 .32cqw,transparent .32cqw);
+  -webkit-mask-size:1.15cqw 34%,4.6cqw 100%;mask-size:1.15cqw 34%,4.6cqw 100%;
+  -webkit-mask-repeat:repeat-x;mask-repeat:repeat-x;
+  -webkit-mask-position:left center;mask-position:left center;
+}
+.meter{background:rgba(255,255,255,.34)}                 /* dotted future */
+.meter i{position:absolute;left:0;top:0;bottom:0;display:block;width:0;background:var(--ink);transition:width 90ms var(--ease-out-soft)}
+.clock{grid-area:clock;font-size:15.4cqw;font-weight:200;line-height:.92;letter-spacing:-.045em;font-variant-numeric:tabular-nums;font-feature-settings:"tnum","calt"}
+.live{grid-area:live;display:grid;justify-items:end;gap:.8cqw;padding-bottom:1cqw}
+.note{font-size:7.6cqw;font-weight:300;line-height:1;letter-spacing:-.02em;min-width:2.6ch;text-align:right}
+.cents{font-size:max(11px,3cqw);color:var(--mute);min-height:1.2em;font-variant-numeric:tabular-nums}
+
+/* Results */
+#results{display:flex;flex-direction:column;min-height:0}
+#results .label{margin:1.6cqw 0 0;font-size:max(12px,3.4cqw);color:var(--mute)}
+.total{margin:.4cqw 0 0;font-size:18.5cqw;font-weight:200;line-height:.95;letter-spacing:-.05em;font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+#grade{margin:1.2cqw 0 2.6cqw;font-size:max(14px,4.2cqw);font-weight:400;color:var(--ink)}
+#rows{flex:1;min-height:0;overflow-y:auto;scrollbar-width:none}
+#rows::-webkit-scrollbar{display:none}
+.row{display:grid;grid-template-columns:minmax(0,1fr) 22cqw 9cqw;gap:2.6cqw;align-items:center;padding:1.15cqw 0;border-top:1px solid var(--line);font-size:max(11px,3.1cqw)}
+.row span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--mute)}
+.row .b{
+  -webkit-mask-image:linear-gradient(90deg,#000 .3cqw,transparent .3cqw);mask-image:linear-gradient(90deg,#000 .3cqw,transparent .3cqw);
+  -webkit-mask-size:1.05cqw 100%;mask-size:1.05cqw 100%;-webkit-mask-repeat:repeat-x;mask-repeat:repeat-x;
+}
+.row .b{height:2.6cqw;background:rgba(255,255,255,.22)}
+.row .b i{display:block;height:100%;background:var(--ink)}
+.row b{text-align:right;font-weight:500;font-variant-numeric:tabular-nums}
+.cue--end{margin:2cqw 0 0;font-size:max(12px,3.4cqw)}

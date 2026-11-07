@@ -3,7 +3,7 @@
 Sing along, get graded per line. Pitch scoring runs in the browser (octave-invariant); the Python API adds lyric checking and ElevenLabs speech.
 
 ```
-web/   static front end (no build step): index.html, css/, js/ modules, data/songs/*.json
+web/   static front end (no build step): index.html, ui/ (look & motion), js/ modules, data/songs/*.json
 api/   FastAPI: song data, lyric scoring, ElevenLabs STT/TTS
 docs/  contracts.md  (read this first)
 ```
@@ -26,7 +26,7 @@ Microphone access needs `localhost` or https. Use headphones.
 |---|---|
 | 1. Audio/pitch | `web/js/pitch.js`, `scoring.js`, `api/services/scoring.py` |
 | 2. Speech/lyrics | `api/services/lyrics.py`, `elevenlabs.py`, song data in other languages |
-| 3. Frontend | `index.html`, `css/`, `js/lyrics.js`, `lane.js` |
+| 3. Frontend | `index.html`, `ui/` (all styling, fonts, motion), `js/lyrics.js`, `lane.js` |
 | 4. Integration | repo, deploy, `main.js`, `api/main.py`, demo and pitch |
 
 ## Checklist

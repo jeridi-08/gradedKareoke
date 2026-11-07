@@ -1,0 +1,33 @@
+/* ══════════════════════════════════════════════════════════════════════
+   FONT SWAP POINT
+   The whole UI uses ONE family name: "Device Sans" (see --font-ui in tokens.css).
+   Change what that name points at, and every pixel of the UI follows,
+   including the canvas pitch lane (js/lane.js reads --font-ui).
+
+   ACTIVE: Inter (static TTFs, Latin subset, SIL OFL 1.1, see fonts/OFL.txt)
+
+   TO USE YOUR OWN .ttf
+   1. Drop the file into  web/ui/fonts/
+   2. Delete or comment out the five Inter blocks below.
+   3. Uncomment the "CUSTOM" block and point `src` at your file.
+      One variable font file covers every weight. If you only have static
+      files, add one @font-face per weight (200, 300, 400, 500, 600).
+   Weights the UI asks for: 200 (big digits), 300 (title), 400, 500, 600.
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* ── Inter ───────────────────────────────────────────────────────── */
+@font-face{font-family:"Device Sans";font-style:normal;font-weight:200;font-display:swap;src:url("fonts/Inter-ExtraLight.ttf") format("truetype")}
+@font-face{font-family:"Device Sans";font-style:normal;font-weight:300;font-display:swap;src:url("fonts/Inter-Light.ttf")      format("truetype")}
+@font-face{font-family:"Device Sans";font-style:normal;font-weight:400;font-display:swap;src:url("fonts/Inter-Regular.ttf")    format("truetype")}
+@font-face{font-family:"Device Sans";font-style:normal;font-weight:500;font-display:swap;src:url("fonts/Inter-Medium.ttf")     format("truetype")}
+@font-face{font-family:"Device Sans";font-style:normal;font-weight:600;font-display:swap;src:url("fonts/Inter-SemiBold.ttf")   format("truetype")}
+
+/* ── CUSTOM (uncomment to use your own file) ─────────────────────────
+@font-face{
+  font-family:"Device Sans";
+  font-style:normal;
+  font-weight:100 900;               // variable font: full range. Static font: one weight, e.g. 400
+  font-display:swap;
+  src:url("fonts/YourFont.ttf") format("truetype");
+}
+──────────────────────────────────────────────────────────────────── */

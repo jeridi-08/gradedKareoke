@@ -1,0 +1,39 @@
+/* Motion. One rule: everything eases out (fast start, soft landing). Tokens live in tokens.css.
+   Triggered by the person: key presses, wheel spin, screen changes, the count-in, the score.
+   Not triggered by the person, on purpose: ONE power-on moment at load, and the record light while recording. */
+
+/* ── Power-on (once) ─────────────────────────────────────────────── */
+@keyframes unit-in{from{opacity:0;transform:translateY(3cqw)}to{opacity:1;transform:none}}
+@keyframes lcd-on{0%{opacity:0;filter:brightness(2.4)}35%{opacity:1}100%{opacity:1;filter:brightness(1)}}
+@keyframes jog-in{from{opacity:0;transform:translateX(-2cqw)}to{opacity:1;transform:none}}
+.shell{animation:unit-in var(--t-slow) var(--ease-out) both}
+.jog{animation:jog-in var(--t-slow) var(--ease-out) 120ms both}
+.status,.screen{animation:lcd-on 1100ms var(--ease-out) 320ms both}
+
+/* ── Screen changes: a new screen settles in from just below ─────── */
+@keyframes screen-in{from{opacity:0;transform:translateY(2.2cqw)}to{opacity:1;transform:none}}
+.screen>section:not([hidden]){animation:screen-in var(--t-base) var(--ease-out) both}
+
+/* ── Count-in: each number lands big and settles ─────────────────── */
+@keyframes count-pop{from{opacity:0;transform:scale(1.55)}to{opacity:1;transform:scale(1)}}
+.count.pop::before{animation:count-pop 520ms var(--ease-out) both}
+
+/* ── Status light ────────────────────────────────────────────────── */
+@keyframes rec-light{0%{opacity:1}60%{opacity:.25}100%{opacity:1}}
+body[data-mode="singing"] .dot,body[data-mode="count"] .dot{animation:rec-light 1.6s var(--ease-out) infinite}
+.dot{transition:background var(--t-fast) var(--ease-out)}
+@keyframes led-ring{from{transform:scale(1);opacity:.75}to{transform:scale(3.4);opacity:0}}
+
+/* ── Score: number counts up (ui.js), grade and rows follow ──────── */
+@keyframes rise{from{opacity:0;transform:translateY(1.6cqw)}to{opacity:1;transform:none}}
+@keyframes fill{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+#results:not([hidden]) .label{animation:rise var(--t-base) var(--ease-out) 60ms both}
+#results:not([hidden]) #grade{animation:rise var(--t-base) var(--ease-out) 700ms both}
+#results:not([hidden]) .row{animation:rise var(--t-base) var(--ease-out) calc(760ms + var(--i,0) * 70ms) both}
+#results:not([hidden]) .row .b i{animation:fill 900ms var(--ease-out) calc(860ms + var(--i,0) * 70ms) both}
+#results:not([hidden]) .cue--end{animation:rise var(--t-base) var(--ease-out) 1300ms both}
+
+/* ── Reduced motion: keep the state changes, drop the movement ───── */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0ms!important}
+}

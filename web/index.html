@@ -3,42 +3,110 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#e4e4e3">
 <title>Graded Karaoke</title>
-<link rel="stylesheet" href="css/style.css">
+<!-- All styling lives in ui/ (tokens, fonts, device, screen, motion). Swap the font in ui/fonts.css. -->
+<link rel="stylesheet" href="ui/index.css">
 </head>
-<body>
-<main>
-  <section id="intro">
-    <h1>Graded Karaoke</h1>
-    <p>Sing along and get graded line by line. Any octave counts, so low and high voices both score fairly.</p>
-    <p>Use headphones so the backing track doesn’t leak into your mic.</p>
-    <button id="enable">Enable microphone</button>
-    <p id="msg" class="hint" role="status"></p>
-  </section>
+<body data-mode="off">
 
-  <section id="stage" hidden>
-    <div class="bar">
-      <label>Song <select id="song"></select></label>
-      <div class="live"><span class="note" id="nn">–</span><span class="cents" id="cc"></span><div class="meter"><i id="lv"></i></div></div>
-    </div>
-    <div class="lyrics" id="lyr"><ol id="ol"></ol><div class="count" id="count" hidden></div></div>
-    <canvas id="cv" aria-label="Target notes and your sung pitch"></canvas>
-    <p class="hint">Pink bars are the target notes, blue dots are your voice. Notes match in any octave.</p>
-    <div class="ctl">
-      <button id="go">Start song</button>
-      <button id="stop" class="ghost" hidden>Stop</button>
-      <label><input type="checkbox" id="guide" checked> Guide tone</label>
-    </div>
-  </section>
+<div class="device" id="device">
 
-  <section id="results" hidden>
-    <p>Your score</p>
-    <div class="total" id="tot">0</div>
-    <p id="grade"></p>
-    <div id="rows"></div>
-    <p></p><button id="again">Sing again</button>
-  </section>
-</main>
+  <div class="shell">
+
+    <!-- ───── LCD ───── -->
+    <div class="bezel">
+      <div class="lcd">
+        <header class="status">
+          <time id="clk" datetime="">--.-- --</time>
+          <span class="state"><i class="dot" aria-hidden="true"></i><span id="state">Mic off</span></span>
+          <span class="status-icons" aria-hidden="true">
+            <svg class="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15a.8.8 0 0 0 1.2.7l12-7.5a.8.8 0 0 0 0-1.4l-12-7.5A.8.8 0 0 0 7 4.5Z"/></svg>
+            <svg class="i-signal" id="signal" data-level="0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path class="a3" d="M2 8.82a15 15 0 0 1 20 0"/><path class="a2" d="M5 13a10 10 0 0 1 14 0"/><path class="a1" d="M8.5 16.5a5 5 0 0 1 7 0"/><path class="a0" d="M12 20h.01"/>
+            </svg>
+          </span>
+        </header>
+
+        <main class="screen">
+          <section id="intro">
+            <h1>Graded Karaoke</h1>
+            <p>Sing along and get graded line by line. Any octave counts, so low and high voices both score fairly.</p>
+            <p>Use headphones so the backing track doesn’t leak into your mic.</p>
+            <p class="cue">Press <b>Enable mic</b> below the screen to begin.</p>
+            <p id="msg" class="hint" role="status"></p>
+          </section>
+
+          <section id="stage" hidden>
+            <div class="bar">
+              <label class="songpick"><span class="sr">Song</span><select id="song"></select></label>
+            </div>
+            <div class="lyrics" id="lyr"><ol id="ol"></ol><div class="count" id="count" hidden></div></div>
+            <canvas id="cv" aria-label="Target notes and your sung pitch"></canvas>
+            <ul class="legend" aria-label="Lane legend">
+              <li><i class="sw sw--target"></i>Target note</li>
+              <li><i class="sw sw--sung"></i>Your voice</li>
+            </ul>
+            <div class="read">
+              <div class="meter" aria-hidden="true"><i id="lv"></i></div>
+              <div class="clock" id="clock" aria-hidden="true">00:00:00</div>
+              <div class="live"><span class="note" id="nn">–</span><span class="cents" id="cc"></span></div>
+            </div>
+          </section>
+
+          <section id="results" hidden>
+            <p class="label">Your score</p>
+            <div class="total" id="tot">0</div>
+            <p id="grade"></p>
+            <div id="rows"></div>
+            <p class="cue cue--end">Press
+              <svg class="inline-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
+              to sing again.</p>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <!-- ───── Chin: mic switch + speaker ───── -->
+    <div class="chin">
+      <button id="enable" class="pill" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/></svg>
+        <span class="pill-label" id="pill-label">Enable mic</span>
+        <i class="led" aria-hidden="true"></i>
+      </button>
+      <div class="grille" aria-hidden="true"></div>
+    </div>
+
+    <!-- ───── Key pad ───── -->
+    <div class="pad">
+      <button id="go" class="key key--rec" type="button" title="Start song" aria-label="Start song" disabled>
+        <i class="led" aria-hidden="true"></i>
+        <span class="cap"><svg class="glyph glyph--rec" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="6"/></svg></span>
+      </button>
+
+      <button id="stop" class="key key--stop" type="button" title="Stop" aria-label="Stop" hidden disabled>
+        <span class="cap"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="6.5" width="11" height="11" rx="1.2"/></svg></span>
+      </button>
+
+      <label class="key key--guide" title="Guide tone">
+        <input type="checkbox" id="guide" class="sr" checked disabled>
+        <i class="led" aria-hidden="true"></i>
+        <span class="cap"><svg class="glyph glyph--line" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
+        <span class="sr">Guide tone</span>
+      </label>
+
+      <button id="again" class="key key--again" type="button" title="Sing again" aria-label="Sing again" disabled>
+        <span class="cap"><svg class="glyph glyph--line" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg></span>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Side wheel (last in DOM so tab order reads screen, mic, keys, wheel). Drives #song, so main.js needs no changes. -->
+  <button id="jog" class="jog" type="button" aria-label="Change song" title="Change song (scroll, click, or arrow keys)" disabled></button>
+</div>
+
 <script type="module" src="js/main.js"></script>
+<script type="module" src="ui/ui.js"></script>
 </body>
 </html>
